@@ -1,0 +1,24 @@
+{
+    "name" : "valib/framework",
+    "description" : "Valib framework",
+    "license" : "MIT",
+    "keywords" : ["valib", "framework"],
+    "authors" : [
+        {
+            "name" : "David Ludwig",
+            "email" : "davidludwigii@gmail.com"
+        }
+    ],
+    "require" : {},
+    "require-dev" : {},
+    "autoload": {
+        "psr-4" : {
+            "Valib\\" : "src/Valib/"
+        }
+    },
+    "extra" : {
+        "branch-alias" : {
+            "dev-master" : "2.3-dev"
+        }
+    }
+}
