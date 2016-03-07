@@ -33,9 +33,6 @@ class Valib
     {
         // Define the constants
         define('VALIB_CONFIG', $this->loadConfig());
-
-        // Load in the helper functions
-        require_once (__DIR__ . '/helpers.php');
     }
 
     /**

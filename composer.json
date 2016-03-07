@@ -12,6 +12,9 @@
     "require" : {},
     "require-dev" : {},
     "autoload": {
+        "files" : [
+            "src/Valib/Utility/helpers.php"
+        ],
         "psr-4" : {
             "Valib\\" : "src/Valib/"
         }
