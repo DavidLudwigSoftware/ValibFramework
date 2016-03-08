@@ -2,16 +2,17 @@
 
 namespace Valib\View;
 
-use Twig\Twig;
-
 class Templates
 {
     public static function load($view, $vars)
     {
-        return "";
+        if (strtolower(env('template_engine')) == 'twig')
+
+            return static::twig($view, $vars);
     }
 
     public static function twig($view, $vars)
     {
+        return Twig::instance()->load($view . '.twig.php', $vars);
     }
 }

@@ -75,6 +75,24 @@ if (!function_exists('request'))
     }
 }
 
+if (!function_exists('redirect'))
+{
+    function redirect(string $url = Null)
+    {
+        return new Valib\Http\RedirectResponse($url);
+    }
+}
+
+if (!function_exists('route'))
+{
+    function route(string $name, array $slugs = [])
+    {
+        $route = valib()->router()->route($name);
+
+        return $route->generateUrl($slugs);
+    }
+}
+
 if (!function_exists('valib'))
 {
     function valib()

@@ -45,16 +45,16 @@ class Route
      * @param       $builder    a function containing route statements
      * @return void
      */
-    public static function group(array $middleware, $builder)
+    public static function group(array $middleware, \Closure $closure)
     {
         // Set the group middleware
-        $this->_groupMiddleware = $middleware;
+        static::$_groupMiddleware = $middleware;
 
         // Build the routes
-        $builder();
+        $closure();
 
         // Clear the group middleware
-        $this->_groupMiddleware = [];
+        static::$_groupMiddleware = [];
     }
 
     /**
@@ -126,7 +126,7 @@ class Route
     {
         $controller = $this->_action['uses'];
 
-        if (in_array('as', $this->_action))
+        if (isset($this->_action['as']))
 
             $this->_name = $this->_action['as'];
 
@@ -190,6 +190,25 @@ class Route
         }
 
         return $values;
+    }
+
+    public function generateUrl($slugs)
+    {
+        $parts = preg_split('/\//', $this->_uri);
+
+        $url = "";
+
+        for ($i = 1; $i < count($parts); $i++)
+
+            if ($parts[$i] == '{}')
+
+                $url .= '/' . urlencode(array_shift($slugs));
+
+            else
+
+                $url .= '/' . $parts[$i];
+
+        return $url;
     }
 
     /**

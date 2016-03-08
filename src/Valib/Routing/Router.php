@@ -12,6 +12,12 @@ class Router
      */
     private $_routes = [];
 
+    /**
+     * A list of route names and indeces
+     * @var [type]
+     */
+    private $_routeNames = [];
+
 
     public function __construct()
     {
@@ -43,6 +49,13 @@ class Router
         return Null;
     }
 
+    public function route(string $name)
+    {
+        return $this->_routes[
+            $this->_routeNames[$name]
+        ];
+    }
+
     /**
      * Add a route to the router
      * @param  Valib\Routing\Route $route
@@ -51,6 +64,10 @@ class Router
     public function addRoute(Route $route)
     {
         $this->_routes[] = $route;
+
+        if ($route->name())
+
+            $this->_routeNames[$route->name()] = count($this->_routes) - 1;
 
         return $this;
     }

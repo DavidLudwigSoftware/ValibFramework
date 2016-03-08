@@ -2,6 +2,8 @@
 
 namespace Valib\Http;
 
+use Valib\Utility\ExtArray;
+
 class Request
 {
     /**
@@ -52,6 +54,18 @@ class Request
      */
     private $_serverProtocol;
 
+    /**
+     * A list of query attributes
+     * @var Valib\Utility\List
+     */
+    private $_query;
+
+    /**
+     * A list of inputs from a request
+     * @var Valib\Utility\List
+     */
+    private $_input;
+
 
     /**
      * Capture the current request
@@ -68,7 +82,9 @@ class Request
                 ->setUserAgent($_SERVER['HTTP_USER_AGENT'])
                 ->setRemoteIp($_SERVER['REMOTE_ADDR'])
                 ->setRemotePort((int) $_SERVER['REMOTE_PORT'])
-                ->setServerProtocol($_SERVER['SERVER_PROTOCOL']);
+                ->setServerProtocol($_SERVER['SERVER_PROTOCOL'])
+                ->setQuery($_GET)
+                ->setInput($_POST);
 
         return $request;
     }
@@ -143,6 +159,24 @@ class Request
     public function serverProtocol()
     {
         return $this->_serverProtocol;
+    }
+
+    /**
+     * Return the query list
+     * @return  Valib\Utility\List
+     */
+    public function query()
+    {
+        return $this->_query;
+    }
+
+    /**
+     * Return the input list
+     * @return  Valib\Utility\List
+     */
+    public function input()
+    {
+        return $this->_input;
     }
 
     /**
@@ -237,6 +271,30 @@ class Request
     public function setServerProtocol(string $protocol)
     {
         $this->_serverProtocol = $protocol;
+
+        return $this;
+    }
+
+    /**
+     * Set the query data for the request
+     * @param array $query
+     * @return self
+     */
+    public function setQuery(array $query)
+    {
+        $this->_query = new ExtArray($query);
+
+        return $this;
+    }
+
+    /**
+     * Set the input for the request
+     * @param array $input
+     * @return self
+     */
+    public function setInput(array $input)
+    {
+        $this->_input = new ExtArray($input);
 
         return $this;
     }
