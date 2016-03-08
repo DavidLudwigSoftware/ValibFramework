@@ -2,7 +2,7 @@
 
 namespace Valib\Core;
 
-use Valib\Utility\Singleton;
+use Valib\Traits\Singleton;
 
 use Valib\Http\Kernel;
 use Valib\Http\Request;

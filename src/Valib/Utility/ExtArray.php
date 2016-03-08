@@ -20,7 +20,7 @@ class ExtArray implements \ArrayAccess
     {
         if ($this->has($key))
 
-            return $this->_data;
+            return $this->_data[$key];
 
         return $default;
     }
@@ -36,6 +36,13 @@ class ExtArray implements \ArrayAccess
             $this->_data[$key] = $value;
 
         return $this;
+    }
+
+    public function init($key, $value)
+    {
+        if (!$this->has($key))
+
+            $this->set($key, $value);
     }
 
     public function remove($key)

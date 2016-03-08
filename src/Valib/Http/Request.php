@@ -222,7 +222,13 @@ class Request
      */
     public function setUri(string $uri)
     {
-        $this->_requestUri = $uri;
+        if (strpos($uri, '?') !== False)
+
+            $this->_requestUri = substr($uri, 0, strpos($uri, '?'));
+
+        else
+
+            $this->_requestUri = $uri;
 
         return $this;
     }

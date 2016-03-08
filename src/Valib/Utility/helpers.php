@@ -67,6 +67,14 @@ if (!function_exists('env'))
     }
 }
 
+if (!function_exists('extArray'))
+{
+    function extArray(array $args = [])
+    {
+        return new Valib\Utility\ExtArray($args);
+    }
+}
+
 if (!function_exists('request'))
 {
     function request()
